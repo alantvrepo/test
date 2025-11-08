@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Affichage mural</title>
+  <style>
+    body{margin:0;display:flex;align-items:center;justify-content:center;height:100vh;font-family:Arial,sans-serif;}
+    #card{font-size:72px;padding:40px;border-radius:20px;box-shadow:0 6px 18px rgba(0,0,0,0.2);}
+  </style>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</head>
+<body>
+  <div id="card">En attente...</div>
+  <script>
+    **COLLE ICI TA CONFIG FIREBASE**
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    const card = document.getElementById('card');
+    db.ref('/display').on('value', s=>{
+      const val=s.val();
+      if(!val){card.textContent='En attente...';return;}
+      card.textContent = val.text;
+      card.style.background = val.bg || '#fff';
+      card.style.color = val.color || '#000';
+    });
+  </script>
+</body>
+</html>
