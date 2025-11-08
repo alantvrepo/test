@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>Télécommande</title></head>
+<body style="font-family:Arial;padding:20px;font-size:24px;">
+  <button onclick="send('Commande prête','lightgreen','black')">Commande prête ✅</button><br><br>
+  <button onclick="send('Veuillez patienter','yellow','black')">Veuillez patienter ⏳</button><br><br>
+  <button onclick="send('Écran vide','','black')">Effacer 🧹</button>
+
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script>
+  **COLLE ICI LA MÊME CONFIG**
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+  function send(text,bg,color){
+    db.ref('/display').set({ text, bg, color });
+  }
+</script>
+</body>
+</html>
