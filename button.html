@@ -1,37 +1,52 @@
 <!doctype html>
 <html>
-<head><meta charset="utf-8"><title>Télécommande</title></head>
-<body style="font-family:Arial;padding:20px;font-size:24px;">
-  <button onclick="send('Commande prête','lightgreen','black')">Commande prête ✅</button><br><br>
-  <button onclick="send('Veuillez patienter','yellow','black')">Veuillez patienter ⏳</button><br><br>
-  <button onclick="send('Écran vide','','black')">Effacer 🧹</button>
+<head>
+  <meta charset="utf-8">
+  <title>Télécommande TV</title>
+  <style>
+    body { font-family: Arial; padding: 20px; text-align: center; background: #fafafa; }
+    button {
+      display: block;
+      width: 80%;
+      margin: 15px auto;
+      font-size: 24px;
+      padding: 20px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    button:active { transform: scale(0.98); }
+  </style>
 
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-<script>
-  // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</head>
+<body>
+  <h1>Contrôle Affichage</h1>
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-  apiKey: "AIzaSyBzEZOAckzdH3uDtmQhu-z4NNGknAGV2o0",
-  authDomain: "affichagetvv.firebaseapp.com",
-  databaseURL: "https://affichagetvv-default-rtdb.europe-west1.firebasedatabase.app",
-  projectId: "affichagetvv",
-  storageBucket: "affichagetvv.firebasestorage.app",
-  messagingSenderId: "14634645841",
-  appId: "1:14634645841:web:bac7b1a0a59943a14b7b70"
-};
+  <button style="background:lightgreen" onclick="send('Commande prête ✅', 'lightgreen', 'black')">Commande prête</button>
+  <button style="background:yellow" onclick="send('Veuillez patienter ⏳', 'yellow', 'black')">Veuillez patienter</button>
+  <button style="background:lightblue" onclick="send('Nettoyage 🚿', 'lightblue', 'black')">Nettoyage</button>
+  <button style="background:#ddd" onclick="send('', '#fff', '#000')">Effacer</button>
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-  firebase.initializeApp(firebaseConfig);
-  const db = firebase.database();
-  function send(text,bg,color){
-    db.ref('/display').set({ text, bg, color });
-  }
-</script>
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBzEZOAckzdH3uDtmQhu-z4NNGknAGV2o0",
+      authDomain: "affichagetvv.firebaseapp.com",
+      databaseURL: "https://affichagetvv-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "affichagetvv",
+      storageBucket: "affichagetvv.firebasestorage.app",
+      messagingSenderId: "14634645841",
+      appId: "1:14634645841:web:bac7b1a0a59943a14b7b70"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    function send(text, bg, color) {
+      db.ref('/display').set({ text, bg, color });
+    }
+  </script>
 </body>
 </html>
